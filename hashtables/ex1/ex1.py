@@ -9,9 +9,21 @@ from hashtables import (HashTable,
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
 
-    """
-    YOUR CODE HERE
-    """
+    # make tuples out of the weights with enumerate and insert into hash table where
+    # weight is the key and its index is the value
+    for index, weight in enumerate(weights):
+        hash_table_insert(ht, weight, index)
+
+    # for those tuples, check the table for limit - weight as the difference
+    # if difference exists in table, then those weights sum up to limit
+    for index, weight in enumerate(weights):
+        difference = limit - weight
+        key = hash_table_retrieve(ht, difference)
+        if key is not None:
+            if key >= index:
+                return (key, index)
+            else:
+                return (index, key)
 
     return None
 
