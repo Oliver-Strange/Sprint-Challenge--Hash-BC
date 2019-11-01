@@ -40,7 +40,14 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    # hash and encode the guess
+    guess = f"{proof}".encode()
+    hashedGuess = hashlib.sha256(guess).hexdigest()
+    # hash and encode the last proof
+    last_hash = str(last_hash).encode()
+    last_hash = hashlib.sha256(last_hash).hexdigest()
+    # compare the last six numbers on guess to the first six numbers of the last proof
+    return guess[:6] == last_hash[-6:]
 
 
 if __name__ == '__main__':
